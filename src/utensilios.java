@@ -17,4 +17,10 @@ public class utensilios extends Material implements Comprable {
     public boolean estaDisponible() {
         return disponible;
     }
+
+    @Override
+    public void reembolsar() {
+        disponible = true;
+        System.out.println("Se ha reembolsado y devuelto al inventario.");
+    }
 }

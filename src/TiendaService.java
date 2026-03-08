@@ -7,6 +7,7 @@ public class TiendaService {
 
     private List<Material> materiales = new ArrayList<>();
     private List<Usuario> usuarios = new ArrayList<>();
+    private List<Compra> compras = new ArrayList<>();
 
 
     public void registrarMaterial(Material material) {
@@ -70,6 +71,41 @@ public class TiendaService {
 
         }
 
+    }
+
+    public void realizarCompra(int idUsuario, int idMaterial) {
+        Usuario usuarioComprador = null;
+        Material materialComprado = null;
+
+        for (Usuario u : usuarios) {
+            if (u.getId() == idUsuario) { usuarioComprador = u; break; }
+        }
+        for (Material m : materiales) {
+            if (m.getId() == idMaterial && m.isDisponible()) { materialComprado = m; break; }
+        }
+
+        if (usuarioComprador != null && materialComprado != null) {
+            ((Comprable) materialComprado).comprar();
+            compras.add(new Compra(usuarioComprador, materialComprado));
+            System.out.println("Compra exitosa: " + usuarioComprador.getNombre() + " compró ID:" + materialComprado.getId());
+        } else {
+            System.out.println("Error: Usuario no encontrado o material no disponible.");
+        }
+    }
+
+    public void realizarReembolso(int idMaterial) {
+        Compra compraARemover = null;
+        for (Compra c : compras) {
+            if (c.getMaterial().getId() == idMaterial) { compraARemover = c; break; }
+        }
+
+        if (compraARemover != null) {
+            ((Comprable) compraARemover.getMaterial()).reembolsar();
+            compras.remove(compraARemover);
+            System.out.println("Reembolso procesado correctamente.");
+        } else {
+            System.out.println("Error: No hay compra asociada a ese material.");
+        }
     }
 }
 

@@ -28,4 +28,10 @@ public class Carne extends Material implements Comprable {
     public String getInfo() {
         return super.getInfo() + " Nombre: " + nombre;
     }
+
+    @Override
+    public void reembolsar() {
+        disponible = true;
+        System.out.println("Se ha reembolsado y devuelto al inventario.");
+    }
 }
