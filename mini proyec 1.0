@@ -1,0 +1,257 @@
+public abstract class Material {
+    protected static int contador = 1;
+    protected int id;
+    protected String tipo;
+    protected int valor;
+    protected boolean disponible;
+
+    public Material(String tipo, int valor) {
+        this.id = contador++;
+        this.tipo = tipo;
+        this.valor = valor;
+        this.disponible = true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public int getValor() {
+        return valor;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public String getInfo() {
+        return "ID: " + id + " Tipo: " + tipo + " Valor: " + valor;
+    }
+}
+
+public interface Comprable {
+    void comprar();
+    boolean estaDisponible();
+}
+
+public class Carne extends Material implements Comprable {
+    private String nombre;
+    private String fechaVencimiento;
+    public Carne(String nombre, String fecha, int valor) {
+        super("Carne", valor);
+        this.nombre = nombre;
+        this.fechaVencimiento = fecha;
+    }
+    @Override
+    public void comprar() {
+        disponible = false;
+        System.out.println("Carne comprada: " + nombre);
+    }
+    @Override
+    public boolean estaDisponible() {
+        return disponible;
+    }
+    @Override
+    public String getInfo() {
+        return super.getInfo() + " Nombre: " + nombre;
+    }
+}
+
+public class Verdura extends Material implements Comprable {
+    private String nombre;
+    public Verdura(String nombre, int valor) {
+        super("Verdura", valor);
+        this.nombre = nombre;
+    }
+    @Override
+    public void comprar() {
+        disponible = false;
+        System.out.println("Verdura comprada: " + nombre);
+    }
+    @Override
+    public boolean estaDisponible() {
+        return disponible;
+    }
+}
+
+public class Olla extends Material implements Comprable {
+    private int cantidad;
+    public Olla(int cantidad, int valor) {
+        super("Olla", valor);
+        this.cantidad = cantidad;
+    }
+    @Override
+    public void comprar() {
+        disponible = false;
+        System.out.println("Olla comprada");
+    }
+    @Override
+    public boolean estaDisponible() {
+        return disponible;
+    }
+}
+
+public class utensilios extends Material implements Comprable {
+    private int cantidad;
+    public utensilios(int cantidad, int valor) {
+        super("utensilios", valor);
+        this.cantidad = cantidad;
+    }
+    @Override
+    public void comprar() {
+        disponible = false;
+        System.out.println("utensilios comprados");
+    }
+    @Override
+    public boolean estaDisponible() {
+        return disponible;
+    }
+}
+public class Usuario {
+    private int id;
+    private String nombre;
+    private String email;
+
+    public Usuario(String nombre, String email,int id) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+    }
+    public int getId() {
+        return id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public String getEmail() {
+        return email;
+    }
+}
+import java.util.ArrayList;
+import java.util.List;
+public class TiendaService {
+    private List<Material> materiales = new ArrayList<>();
+    private List<Usuario> usuarios = new ArrayList<>();
+    public void registrarMaterial(Material material) {
+        materiales.add(material);
+    }
+    public void registrarUsuario(Usuario usuario) {
+        usuarios.add(usuario);
+    }
+    public void mostrarMateriales() {
+        for (Material m : materiales) {
+            System.out.println(m.getInfo());
+        }
+    }
+    public void mostrarUsuarios() {
+        for (Usuario u : usuarios) {
+            System.out.println("ID: " + u.getId() + " Nombre: " + u.getNombre()+ " Correo:" + u.getEmail() );
+        }
+    }
+}
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        TiendaService tienda = new TiendaService();
+        Scanner sc = new Scanner(System.in);
+
+        // Registrar usuarios
+        System.out.println("ingrese datos del usuario");
+
+        System.out.print("Ingrese su nombre: ");
+
+        String nombre = sc.nextLine();
+
+        System.out.print("Ingrese su email: ");
+
+        String email = sc.nextLine();
+
+        System.out.print("Ingrese su ID: ");
+
+        int id = sc.nextInt();
+
+        Usuario u1 = new Usuario(nombre, email,id);
+
+        tienda.registrarUsuario(u1);
+
+        // Registrar materiales
+        System.out.println("1.carne 2.verdura 3.olla 4.utenciulios");
+        System.out.print("ingrese material para registrar: ");
+        int numeromaterial = sc.nextInt();
+
+        sc.nextLine();
+        switch(numeromaterial) {
+            case 1: {
+                // Registrar carne
+                System.out.print("ingrese datos de la carne");
+
+                System.out.print("\nIngrese nombre: ");
+                String carnom = sc.nextLine();
+
+                System.out.print("\nIngrese fecha de venciminto: ");
+                String carfec = sc.nextLine();
+
+                System.out.print("\nIngrese precio: ");
+                int carpre = sc.nextInt();
+
+                Carne carne = new Carne(carnom, carfec, carpre);
+                tienda.registrarMaterial(carne);
+                break;
+            }
+            case 2: {
+                System.out.print("ingrese datos de la verdura");
+
+                System.out.print("\nIngrese nombre: ");
+                String vernom = sc.nextLine();
+
+                System.out.print("\nIngrese precio: ");
+                int verpre = sc.nextInt();
+
+                Verdura verdura = new Verdura(vernom, verpre);
+
+                tienda.registrarMaterial(verdura);
+            break;}
+
+            case 3: {
+                System.out.print("ingrese datos del juego de ollas");
+
+                System.out.print("\nIngrese cantidad: ");
+                int ollacan = sc.nextInt();
+
+                System.out.print("\nIngrese precio: ");
+                int ollapre = sc.nextInt();
+
+                Olla olla = new Olla(ollacan, ollapre);
+
+                tienda.registrarMaterial(olla);
+            break;}
+
+            case 4: {
+                System.out.print("ingrese datos del juego de utensilios");
+
+                System.out.print("\nIngrese cantidad: ");
+                int utecan = sc.nextInt();
+
+                System.out.print("\nIngrese precio: ");
+                int utepre = sc.nextInt();
+
+                utensilios utensilios = new utensilios(utecan, utepre);
+
+                tienda.registrarMaterial(utensilios);
+                break;}
+
+            default:
+                System.out.println("numero incorecto ");
+        }
+        System.out.println("Materiales:");
+        tienda.mostrarMateriales();
+        System.out.println("\nUsuarios:");
+        tienda.mostrarUsuarios();
+
+    }
+}
