@@ -134,16 +134,13 @@ El sistema permite:
 ## Caso de prueba 1 – Registro de usuario
 
 **Entrada**
+
+
+
+
 <img width="374" height="88" alt="image" src="https://github.com/user-attachments/assets/817d71bd-e5c1-4b14-a831-fb29f3d4bcbc" />
 
 
-Nombre: Juan
-Email: [juan@email.com](mailto:juan@email.com)
-ID: 1
-
-**Resultado esperado**
-
-El usuario se registra correctamente en el sistema.
 
 ---
 
