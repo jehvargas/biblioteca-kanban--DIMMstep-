@@ -148,13 +148,10 @@ El sistema permite:
 
 **Entrada**
 
-Tipo de material: Olla
-Cantidad: 5
-Precio: 20000
 
-**Resultado esperado**
 
-El material se registra en el sistema y se muestra en la lista de materiales disponibles.
+<img width="400" height="251" alt="image" src="https://github.com/user-attachments/assets/312f2842-5f77-4b18-8b38-13265d8b4ec0" />
+
 
 ---
 
@@ -162,12 +159,10 @@ El material se registra en el sistema y se muestra en la lista de materiales dis
 
 **Entrada**
 
-ID Usuario: 1
-ID Material: 1
 
-**Resultado esperado**
 
-El sistema registra la compra correctamente y el material cambia a estado **no disponible**.
+
+<img width="569" height="177" alt="image" src="https://github.com/user-attachments/assets/07cda794-7ec5-448f-a918-5ba53a8b8115" />
 
 ---
 
@@ -175,12 +170,10 @@ El sistema registra la compra correctamente y el material cambia a estado **no d
 
 **Entrada**
 
-Opción de reembolso: Sí
-ID Material: 1
 
-**Resultado esperado**
 
-El material es reembolsado y vuelve a estar disponible en el inventario.
+<img width="517" height="198" alt="image" src="https://github.com/user-attachments/assets/9b995f38-738d-4127-ae88-80b4332c1568" />
+
 
 ---
 
@@ -188,15 +181,10 @@ El material es reembolsado y vuelve a estar disponible en el inventario.
 
 **Entrada**
 
-Precio del material: 20000
 
-**Proceso**
 
-Se aplica un impuesto del 10%.
+<img width="749" height="154" alt="image" src="https://github.com/user-attachments/assets/cfaeb977-c2d4-4493-aa03-e839e9e12328" />
 
-**Resultado esperado**
-
-Precio final: 22000
 
 ---
 
