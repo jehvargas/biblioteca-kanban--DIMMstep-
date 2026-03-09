@@ -133,11 +133,26 @@ public class Main {
         System.out.println("Ingrese el ID del material a reembolsar:");
         int idReembolso = sc.nextInt();
 
-        // Ejecutar el reembolso
-        tienda.realizarReembolso(idReembolso);
+       
+        //Ejecuta un reembolso
+        System.out.println("\n¿Desea realizar un reembolso?");
+        System.out.println("1. Sí");
+        System.out.println("2. No");
 
-        System.out.println("\n--- Consultar estado después del reembolso ---");
-        tienda.consultarMaterialesDisponibles();
+        int opcionReembolso = sc.nextInt();
+
+        if (opcionReembolso == 1) {
+
+            System.out.println("Ingrese el ID del material a reembolsar:");
+            int idReembolso = sc.nextInt();
+
+            tienda.realizarReembolso(idReembolso);
+
+        } else {
+
+            System.out.println("No se realizó ningún reembolso.");
+
+        }
 
 
                 //parte del punto 3
