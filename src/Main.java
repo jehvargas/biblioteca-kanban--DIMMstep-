@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 
@@ -67,7 +66,7 @@ public class Main {
                 Verdura verdura = new Verdura(vernom, verpre);
 
                 tienda.registrarMaterial(verdura);
-            break;}
+                break;}
 
             case 3: {
                 System.out.print("ingrese datos del juego de ollas");
@@ -81,7 +80,7 @@ public class Main {
                 Olla olla = new Olla(ollacan, ollapre);
 
                 tienda.registrarMaterial(olla);
-            break;}
+                break;}
 
             case 4: {
                 System.out.print("ingrese datos del juego de utensilios");
@@ -116,7 +115,7 @@ public class Main {
         tienda.mostrarUsuarios();
 
 
-                // --- PRUEBA COMPRAS Y REEMBOLSOS  ---
+        // --- PRUEBA COMPRAS Y REEMBOLSOS  ---
         System.out.println("\n--- Módulo de Compras ---");
         System.out.println("Ingrese el ID del usuario que va a comprar:");
         int idUsu = sc.nextInt();
@@ -129,11 +128,7 @@ public class Main {
         System.out.println("\n--- Consultar estado después de la compra ---");
         tienda.consultarMaterialesComprados();
 
-        System.out.println("\n--- Módulo de Reembolsos ---");
-        System.out.println("Ingrese el ID del material a reembolsar:");
-        int idReembolso = sc.nextInt();
 
-       
         //Ejecuta un reembolso
         System.out.println("\n¿Desea realizar un reembolso?");
         System.out.println("1. Sí");
@@ -155,7 +150,7 @@ public class Main {
         }
 
 
-                //parte del punto 3
+        //parte del punto 3
         System.out.println("\nConsultar materiales:");
         System.out.println("1. Ver disponibles");
         System.out.println("2. Ver comprados");
