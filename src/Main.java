@@ -172,8 +172,13 @@ public class Main {
 
         }
 
+        System.out.println("\n--- Cálculo final de costos ---");
+
+        tienda.mostrarCostoTotalCompras();
+
 
     }
+
 
 
 
