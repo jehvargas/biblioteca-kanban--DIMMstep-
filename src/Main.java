@@ -131,6 +131,7 @@ public class Main {
         System.out.println("\n--- Consultar estado después de la compra ---");
         tienda.consultarMaterialesComprados();
 
+        //Ejecuta un reembolso
         System.out.println("\n¿Desea realizar un reembolso?");
         System.out.println("1. Sí");
         System.out.println("2. No");
