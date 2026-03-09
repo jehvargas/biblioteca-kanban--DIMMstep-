@@ -140,10 +140,7 @@ public class Main {
         tienda.consultarMaterialesDisponibles();
 
 
-    }
-
-
-        //parte del punto 3
+                //parte del punto 3
         System.out.println("\nConsultar materiales:");
         System.out.println("1. Ver disponibles");
         System.out.println("2. Ver comprados");
@@ -164,6 +161,12 @@ public class Main {
                 System.out.println("Opción incorrecta");
 
         }
+
+
+    }
+
+
+
 
 
 }
