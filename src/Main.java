@@ -123,15 +123,11 @@ public class Main {
         System.out.println("Ingrese el ID del material a comprar:");
         int idMat = sc.nextInt();
 
-        // Ejecutar la compra
+         // Ejecutar la compra
         tienda.realizarCompra(idUsu, idMat);
 
         System.out.println("\n--- Consultar estado después de la compra ---");
         tienda.consultarMaterialesComprados();
-
-        System.out.println("\n--- Módulo de Reembolsos ---");
-        System.out.println("Ingrese el ID del material a reembolsar:");
-        int idReembolso = sc.nextInt();
 
        
         //Ejecuta un reembolso
