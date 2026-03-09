@@ -116,29 +116,7 @@ public class Main {
         tienda.mostrarUsuarios();
 
 
-        //parte del punto 3
-        System.out.println("\nConsultar materiales:");
-        System.out.println("1. Ver disponibles");
-        System.out.println("2. Ver comprados");
-
-        int consulta = sc.nextInt();
-
-        switch (consulta) {
-
-            case 1:
-                tienda.consultarMaterialesDisponibles();
-                break;
-
-            case 2:
-                tienda.consultarMaterialesComprados();
-                break;
-
-            default:
-                System.out.println("Opción incorrecta");
-
-        }
-
-        // --- PRUEBA COMPRAS Y REEMBOLSOS  ---
+                // --- PRUEBA COMPRAS Y REEMBOLSOS  ---
         System.out.println("\n--- Módulo de Compras ---");
         System.out.println("Ingrese el ID del usuario que va a comprar:");
         int idUsu = sc.nextInt();
@@ -163,6 +141,31 @@ public class Main {
 
 
     }
+
+
+        //parte del punto 3
+        System.out.println("\nConsultar materiales:");
+        System.out.println("1. Ver disponibles");
+        System.out.println("2. Ver comprados");
+
+        int consulta = sc.nextInt();
+
+        switch (consulta) {
+
+            case 1:
+                tienda.consultarMaterialesDisponibles();
+                break;
+
+            case 2:
+                tienda.consultarMaterialesComprados();
+                break;
+
+            default:
+                System.out.println("Opción incorrecta");
+
+        }
+
+
 }
 
 
