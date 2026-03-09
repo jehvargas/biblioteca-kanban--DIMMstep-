@@ -116,8 +116,6 @@ public class Main {
         tienda.mostrarUsuarios();
 
 
-
-
                 // --- PRUEBA COMPRAS Y REEMBOLSOS  ---
         System.out.println("\n--- Módulo de Compras ---");
         System.out.println("Ingrese el ID del usuario que va a comprar:");
@@ -131,28 +129,18 @@ public class Main {
         System.out.println("\n--- Consultar estado después de la compra ---");
         tienda.consultarMaterialesComprados();
 
-        //Ejecuta un reembolso
-        System.out.println("\n¿Desea realizar un reembolso?");
-        System.out.println("1. Sí");
-        System.out.println("2. No");
+        System.out.println("\n--- Módulo de Reembolsos ---");
+        System.out.println("Ingrese el ID del material a reembolsar:");
+        int idReembolso = sc.nextInt();
 
-        int opcionReembolso = sc.nextInt();
+        // Ejecutar el reembolso
+        tienda.realizarReembolso(idReembolso);
 
-        if (opcionReembolso == 1) {
-
-            System.out.println("Ingrese el ID del material a reembolsar:");
-            int idReembolso = sc.nextInt();
-
-            tienda.realizarReembolso(idReembolso);
-
-        } else {
-
-            System.out.println("No se realizó ningún reembolso.");
-
-        }
+        System.out.println("\n--- Consultar estado después del reembolso ---");
+        tienda.consultarMaterialesDisponibles();
 
 
-        //parte del punto 3
+                //parte del punto 3
         System.out.println("\nConsultar materiales:");
         System.out.println("1. Ver disponibles");
         System.out.println("2. Ver comprados");
@@ -179,8 +167,9 @@ public class Main {
 
 
 
-}
 
+
+}
 
 
 
