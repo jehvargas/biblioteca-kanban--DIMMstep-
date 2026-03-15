@@ -1,4 +1,6 @@
-//Meter calculadora como caso de uso
+package creacionUsuariosYMateriales;
+
+
 public class CalculadoraCosto {
 
     public static int calcularCosto(int precioMaterial) {

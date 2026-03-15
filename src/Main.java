@@ -10,7 +10,7 @@ public class Main {
         TiendaService tienda = new TiendaService();
         Scanner sc = new Scanner(System.in);
 
-        // CASOS DE USO
+        // USE CASES
         RegistrarUsuarioUseCase registrarUsuario =
                 new RegistrarUsuarioUseCase(tienda);
 
@@ -23,19 +23,32 @@ public class Main {
         ConsultarComprasRealizadasUseCase verComprados =
                 new ConsultarComprasRealizadasUseCase(tienda);
 
+        RealizarCompraUseCase realizarCompra =
+                new RealizarCompraUseCase(
+                        tienda.getMateriales(),
+                        tienda.getUsuarios(),
+                        tienda.getCompras()
+                );
+
+        RealizarReembolsoUseCase realizarReembolso =
+                new RealizarReembolsoUseCase(
+                        tienda.getCompras()
+                );
+
 
         // -------------------------
         // REGISTRAR USUARIO
         // -------------------------
+
         System.out.println("Ingrese datos del usuario");
 
-        System.out.print("Ingrese su nombre: ");
+        System.out.print("Nombre: ");
         String nombre = sc.nextLine();
 
-        System.out.print("Ingrese su email: ");
+        System.out.print("Email: ");
         String email = sc.nextLine();
 
-        System.out.print("Ingrese su ID: ");
+        System.out.print("ID: ");
         int id = sc.nextInt();
 
         registrarUsuario.ejecutar(nombre, email, id);
@@ -45,19 +58,16 @@ public class Main {
         // REGISTRAR MATERIAL
         // -------------------------
 
-        System.out.println("1. carne 2. verdura 3. olla 4. utensilios");
-        System.out.print("Ingrese material para registrar: ");
+        System.out.println("1. Carne 2. Verdura 3. Olla 4. Utensilios");
 
-        int numeromaterial = sc.nextInt();
+        int opcion = sc.nextInt();
         sc.nextLine();
 
-        switch (numeromaterial) {
+        switch (opcion) {
 
-            case 1: {
+            case 1:
 
-                System.out.println("Ingrese datos de la carne");
-
-                System.out.print("Nombre: ");
+                System.out.print("Nombre carne: ");
                 String carnom = sc.nextLine();
 
                 System.out.print("Fecha vencimiento: ");
@@ -66,66 +76,56 @@ public class Main {
                 System.out.print("Precio: ");
                 int carpre = sc.nextInt();
 
-                Carne carne = new Carne(carnom, carfec, carpre);
-
-                registrarMaterial.ejecutar(carne);
+                registrarMaterial.ejecutar(
+                        new Carne(carnom, carfec, carpre)
+                );
 
                 break;
-            }
 
-            case 2: {
+            case 2:
 
-                System.out.println("Ingrese datos de la verdura");
-
-                System.out.print("Nombre: ");
+                System.out.print("Nombre verdura: ");
                 String vernom = sc.nextLine();
 
                 System.out.print("Precio: ");
                 int verpre = sc.nextInt();
 
-                Verdura verdura = new Verdura(vernom, verpre);
-
-                registrarMaterial.ejecutar(verdura);
+                registrarMaterial.ejecutar(
+                        new Verdura(vernom, verpre)
+                );
 
                 break;
-            }
 
-            case 3: {
+            case 3:
 
-                System.out.println("Ingrese datos del juego de ollas");
-
-                System.out.print("Cantidad: ");
+                System.out.print("Cantidad ollas: ");
                 int ollacan = sc.nextInt();
 
                 System.out.print("Precio: ");
                 int ollapre = sc.nextInt();
 
-                Olla olla = new Olla(ollacan, ollapre);
-
-                registrarMaterial.ejecutar(olla);
+                registrarMaterial.ejecutar(
+                        new Olla(ollacan, ollapre)
+                );
 
                 break;
-            }
 
-            case 4: {
+            case 4:
 
-                System.out.println("Ingrese datos del juego de utensilios");
-
-                System.out.print("Cantidad: ");
+                System.out.print("Cantidad utensilios: ");
                 int utecan = sc.nextInt();
 
                 System.out.print("Precio: ");
                 int utepre = sc.nextInt();
 
-                Utensilios utensilios = new Utensilios(utecan, utepre);
-
-                registrarMaterial.ejecutar(utensilios);
+                registrarMaterial.ejecutar(
+                        new Utensilios(utecan, utepre)
+                );
 
                 break;
-            }
 
             default:
-                System.out.println("Número incorrecto");
+                System.out.println("Opción inválida");
         }
 
 
@@ -133,53 +133,44 @@ public class Main {
         // MOSTRAR DATOS
         // -------------------------
 
-        System.out.println("\nMateriales:");
-        tienda.mostrarMateriales();
-
         System.out.println("\nUsuarios:");
         tienda.mostrarUsuarios();
 
+        System.out.println("\nMateriales:");
+        tienda.mostrarMateriales();
+
 
         // -------------------------
-        // COMPRAS
+        // COMPRA
         // -------------------------
 
-        System.out.println("\n--- Módulo de Compras ---");
+        System.out.println("\n--- Comprar ---");
 
-        System.out.println("Ingrese el ID del usuario que va a comprar:");
+        System.out.print("ID Usuario: ");
         int idUsu = sc.nextInt();
 
-        System.out.println("Ingrese el ID del material a comprar:");
+        System.out.print("ID Material: ");
         int idMat = sc.nextInt();
 
-        tienda.realizarCompra(idUsu, idMat);
-
-
-        System.out.println("\n--- Consultar estado después de la compra ---");
-
-        verComprados.ejecutar();
+        realizarCompra.ejecutar(idUsu, idMat);
 
 
         // -------------------------
         // REEMBOLSO
         // -------------------------
 
-        System.out.println("\n¿Desea realizar un reembolso?");
+        System.out.println("\n¿Desea reembolso?");
         System.out.println("1. Sí");
         System.out.println("2. No");
 
-        int opcionReembolso = sc.nextInt();
+        int op = sc.nextInt();
 
-        if (opcionReembolso == 1) {
+        if (op == 1) {
 
-            System.out.println("Ingrese el ID del material a reembolsar:");
+            System.out.print("ID Material: ");
             int idReembolso = sc.nextInt();
 
-            tienda.realizarReembolso(idReembolso);
-
-        } else {
-
-            System.out.println("No se realizó ningún reembolso.");
+            realizarReembolso.ejecutar(idReembolso);
 
         }
 
@@ -188,9 +179,9 @@ public class Main {
         // CONSULTAS
         // -------------------------
 
-        System.out.println("\nConsultar materiales:");
-        System.out.println("1. Ver disponibles");
-        System.out.println("2. Ver comprados");
+        System.out.println("\nConsultar:");
+        System.out.println("1. Disponibles");
+        System.out.println("2. Comprados");
 
         int consulta = sc.nextInt();
 
@@ -204,17 +195,9 @@ public class Main {
                 verComprados.ejecutar();
                 break;
 
-            default:
-                System.out.println("Opción incorrecta");
         }
 
-
-        // -------------------------
-        // COSTOS
-        // -------------------------
-
-        System.out.println("\n--- Cálculo final de costos ---");
-
+        System.out.println("\nCosto total:");
         tienda.mostrarCostoTotalCompras();
 
     }

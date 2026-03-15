@@ -7,7 +7,7 @@ public abstract class Material {
     protected int id;
     protected String tipo;
     protected int valor;
-    protected boolean disponible;
+    public boolean disponible;
 
     public Material(String tipo, int valor) {
         this.id = contador++;

@@ -10,19 +10,42 @@ public class TiendaService {
     private List<Compra> compras = new ArrayList<>();
 
 
+    // -----------------------------
+    // GETTERS (para los UseCases)
+    // -----------------------------
+
+    public List<Material> getMateriales() {
+        return materiales;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public List<Compra> getCompras() {
+        return compras;
+    }
+
+
+    // -----------------------------
     // Registrar material
+    // -----------------------------
     public void registrarMaterial(Material material) {
         materiales.add(material);
     }
 
 
+    // -----------------------------
     // Registrar usuario
+    // -----------------------------
     public void registrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
     }
 
 
+    // -----------------------------
     // Mostrar materiales
+    // -----------------------------
     public void mostrarMateriales() {
         for (Material m : materiales) {
             System.out.println(m.getInfo());
@@ -30,7 +53,9 @@ public class TiendaService {
     }
 
 
+    // -----------------------------
     // Mostrar usuarios
+    // -----------------------------
     public void mostrarUsuarios() {
         for (Usuario u : usuarios) {
             System.out.println(
@@ -42,7 +67,9 @@ public class TiendaService {
     }
 
 
+    // -----------------------------
     // Consultar materiales disponibles
+    // -----------------------------
     public void consultarMaterialesDisponibles() {
 
         System.out.println("\nMateriales disponibles:");
@@ -69,10 +96,14 @@ public class TiendaService {
     }
 
 
+    // -----------------------------
     // Consultar materiales comprados
+    // -----------------------------
     public void consultarMaterialesComprados() {
 
         System.out.println("\nMateriales comprados:");
+
+        boolean hay = false;
 
         for (Material m : materiales) {
 
@@ -82,21 +113,27 @@ public class TiendaService {
 
                 if (!c.estaDisponible()) {
                     System.out.println(m.getInfo());
+                    hay = true;
                 }
 
             }
 
         }
+
+        if (!hay) {
+            System.out.println("No hay materiales comprados.");
+        }
     }
 
 
-    // Realizar compra
+    // -----------------------------
+    // Realizar compra (método viejo)
+    // -----------------------------
     public void realizarCompra(int idUsuario, int idMaterial) {
 
         Usuario usuarioComprador = null;
         Material materialComprado = null;
 
-        // Buscar usuario
         for (Usuario u : usuarios) {
 
             if (u.getId() == idUsuario) {
@@ -106,7 +143,6 @@ public class TiendaService {
 
         }
 
-        // Buscar material
         for (Material m : materiales) {
 
             if (m.getId() == idMaterial && m.isDisponible()) {
@@ -139,7 +175,9 @@ public class TiendaService {
     }
 
 
-    // Reembolso
+    // -----------------------------
+    // Reembolso (método viejo)
+    // -----------------------------
     public void realizarReembolso(int idMaterial) {
 
         Compra compraARemover = null;
@@ -155,7 +193,10 @@ public class TiendaService {
 
         if (compraARemover != null) {
 
-            ((Comprable) compraARemover.getMaterial()).comprar();
+            Material m = compraARemover.getMaterial();
+
+            m.disponible = true;
+
             compras.remove(compraARemover);
 
             System.out.println("Reembolso procesado correctamente.");
@@ -169,7 +210,9 @@ public class TiendaService {
     }
 
 
-    // Mostrar costo total de compras
+    // -----------------------------
+    // Mostrar costo total
+    // -----------------------------
     public void mostrarCostoTotalCompras() {
 
         System.out.println("\n--- Costo total de compras ---");
