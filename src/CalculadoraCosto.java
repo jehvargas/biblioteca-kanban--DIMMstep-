@@ -1,3 +1,4 @@
+//Meter calculadora como caso de uso
 public class CalculadoraCosto {
 
     public static int calcularCosto(int precioMaterial) {
