@@ -1,6 +1,3 @@
-package creacionUsuariosYMateriales;
-
-
 public class CalculadoraCosto {
 
     public static int calcularCosto(int precioMaterial) {
