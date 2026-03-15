@@ -1,3 +1,5 @@
+package adapters;
+
 import creacionUsuariosYMateriales.*;
 import usecases.*;
 
