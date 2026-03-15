@@ -7,4 +7,6 @@ public interface Comprable {
 
     boolean estaDisponible();
 
+    void reembolsar();
+
 }

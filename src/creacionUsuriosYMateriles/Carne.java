@@ -24,6 +24,12 @@ public class Carne extends Material implements Comprable {
     }
 
     @Override
+    public void reembolsar() {
+        disponible = true;
+        System.out.println("Carne reembolsada: " + nombre);
+    }
+
+    @Override
     public String getInfo() {
         return super.getInfo() + " Nombre: " + nombre;
     }

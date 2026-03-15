@@ -19,4 +19,10 @@ public class Verdura extends Material implements Comprable {
     public boolean estaDisponible() {
         return disponible;
     }
+
+    @Override
+    public void reembolsar() {
+        disponible = true;
+        System.out.println("Verdura reembolsada: " + nombre);
+    }
 }
