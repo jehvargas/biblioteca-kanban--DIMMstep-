@@ -1,135 +1,169 @@
-import java.util.Scanner;
+import creacionUsuariosYMateriales.*;
+import usecases.*;
 
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+
         TiendaService tienda = new TiendaService();
         Scanner sc = new Scanner(System.in);
 
+        // CASOS DE USO
+        RegistrarUsuarioUseCase registrarUsuario =
+                new RegistrarUsuarioUseCase(tienda);
 
-        // Registrar usuarios
-        System.out.println("ingrese datos del usuario");
+        RegistrarMaterialUseCase registrarMaterial =
+                new RegistrarMaterialUseCase(tienda);
+
+        ConsultarMaterialesDisponiblesUseCase verDisponibles =
+                new ConsultarMaterialesDisponiblesUseCase(tienda);
+
+        ConsultarComprasRealizadasUseCase verComprados =
+                new ConsultarComprasRealizadasUseCase(tienda);
+
+
+        // -------------------------
+        // REGISTRAR USUARIO
+        // -------------------------
+        System.out.println("Ingrese datos del usuario");
 
         System.out.print("Ingrese su nombre: ");
-
         String nombre = sc.nextLine();
 
         System.out.print("Ingrese su email: ");
-
         String email = sc.nextLine();
 
         System.out.print("Ingrese su ID: ");
-
         int id = sc.nextInt();
 
-        Usuario u1 = new Usuario(nombre, email,id);
-
-        tienda.registrarUsuario(u1);
+        registrarUsuario.ejecutar(nombre, email, id);
 
 
-        // Registrar materiales
+        // -------------------------
+        // REGISTRAR MATERIAL
+        // -------------------------
 
+        System.out.println("1. carne 2. verdura 3. olla 4. utensilios");
+        System.out.print("Ingrese material para registrar: ");
 
-        System.out.println("1.carne 2.verdura 3.olla 4.utenciulios");
-        System.out.print("ingrese material para registrar: ");
         int numeromaterial = sc.nextInt();
-
         sc.nextLine();
-        switch(numeromaterial) {
-            case 1: {
-                // Registrar carne
-                System.out.print("ingrese datos de la carne");
 
-                System.out.print("\nIngrese nombre: ");
+        switch (numeromaterial) {
+
+            case 1: {
+
+                System.out.println("Ingrese datos de la carne");
+
+                System.out.print("Nombre: ");
                 String carnom = sc.nextLine();
 
-                System.out.print("\nIngrese fecha de venciminto: ");
+                System.out.print("Fecha vencimiento: ");
                 String carfec = sc.nextLine();
 
-                System.out.print("\nIngrese precio: ");
+                System.out.print("Precio: ");
                 int carpre = sc.nextInt();
 
                 Carne carne = new Carne(carnom, carfec, carpre);
-                tienda.registrarMaterial(carne);
+
+                registrarMaterial.ejecutar(carne);
+
                 break;
             }
-            case 2: {
-                System.out.print("ingrese datos de la verdura");
 
-                System.out.print("\nIngrese nombre: ");
+            case 2: {
+
+                System.out.println("Ingrese datos de la verdura");
+
+                System.out.print("Nombre: ");
                 String vernom = sc.nextLine();
 
-                System.out.print("\nIngrese precio: ");
+                System.out.print("Precio: ");
                 int verpre = sc.nextInt();
 
                 Verdura verdura = new Verdura(vernom, verpre);
 
-                tienda.registrarMaterial(verdura);
-                break;}
+                registrarMaterial.ejecutar(verdura);
+
+                break;
+            }
 
             case 3: {
-                System.out.print("ingrese datos del juego de ollas");
 
-                System.out.print("\nIngrese cantidad: ");
+                System.out.println("Ingrese datos del juego de ollas");
+
+                System.out.print("Cantidad: ");
                 int ollacan = sc.nextInt();
 
-                System.out.print("\nIngrese precio: ");
+                System.out.print("Precio: ");
                 int ollapre = sc.nextInt();
 
                 Olla olla = new Olla(ollacan, ollapre);
 
-                tienda.registrarMaterial(olla);
-                break;}
+                registrarMaterial.ejecutar(olla);
+
+                break;
+            }
 
             case 4: {
-                System.out.print("ingrese datos del juego de utensilios");
 
-                System.out.print("\nIngrese cantidad: ");
+                System.out.println("Ingrese datos del juego de utensilios");
+
+                System.out.print("Cantidad: ");
                 int utecan = sc.nextInt();
 
-                System.out.print("\nIngrese precio: ");
+                System.out.print("Precio: ");
                 int utepre = sc.nextInt();
 
-                utensilios utensilios = new utensilios(utecan, utepre);
+                Utensilios utensilios = new Utensilios(utecan, utepre);
 
-                tienda.registrarMaterial(utensilios);
-                break;}
+                registrarMaterial.ejecutar(utensilios);
+
+                break;
+            }
 
             default:
-                System.out.println("numero incorecto ");
+                System.out.println("Número incorrecto");
         }
 
 
+        // -------------------------
+        // MOSTRAR DATOS
+        // -------------------------
 
-
-
-
-
-
-
-        System.out.println("Materiales:");
+        System.out.println("\nMateriales:");
         tienda.mostrarMateriales();
 
         System.out.println("\nUsuarios:");
         tienda.mostrarUsuarios();
 
 
-        // --- PRUEBA COMPRAS Y REEMBOLSOS  ---
+        // -------------------------
+        // COMPRAS
+        // -------------------------
+
         System.out.println("\n--- Módulo de Compras ---");
+
         System.out.println("Ingrese el ID del usuario que va a comprar:");
         int idUsu = sc.nextInt();
+
         System.out.println("Ingrese el ID del material a comprar:");
         int idMat = sc.nextInt();
 
-        // Ejecutar la compra
         tienda.realizarCompra(idUsu, idMat);
 
+
         System.out.println("\n--- Consultar estado después de la compra ---");
-        tienda.consultarMaterialesComprados();
+
+        verComprados.ejecutar();
 
 
-        //Ejecuta un reembolso
+        // -------------------------
+        // REEMBOLSO
+        // -------------------------
+
         System.out.println("\n¿Desea realizar un reembolso?");
         System.out.println("1. Sí");
         System.out.println("2. No");
@@ -150,7 +184,10 @@ public class Main {
         }
 
 
-        //parte del punto 3
+        // -------------------------
+        // CONSULTAS
+        // -------------------------
+
         System.out.println("\nConsultar materiales:");
         System.out.println("1. Ver disponibles");
         System.out.println("2. Ver comprados");
@@ -160,32 +197,28 @@ public class Main {
         switch (consulta) {
 
             case 1:
-                tienda.consultarMaterialesDisponibles();
+                verDisponibles.ejecutar();
                 break;
 
             case 2:
-                tienda.consultarMaterialesComprados();
+                verComprados.ejecutar();
                 break;
 
             default:
                 System.out.println("Opción incorrecta");
-
         }
+
+
+        // -------------------------
+        // COSTOS
+        // -------------------------
 
         System.out.println("\n--- Cálculo final de costos ---");
 
         tienda.mostrarCostoTotalCompras();
 
-
     }
-
-
-
-
-
-
 }
-
 
 
 

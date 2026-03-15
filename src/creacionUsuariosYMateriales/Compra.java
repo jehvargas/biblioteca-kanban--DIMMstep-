@@ -1,4 +1,4 @@
-package creacionUsuriosYMateriles;
+package creacionUsuariosYMateriales;
 
 public class Compra {
 
