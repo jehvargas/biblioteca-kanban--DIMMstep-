@@ -1,4 +1,4 @@
-package creacionUsuriosYMateriles;
+package creacionUsuariosYMateriales;
 
 
 public class Carne extends Material implements Comprable {
@@ -7,7 +7,7 @@ public class Carne extends Material implements Comprable {
     private String fechaVencimiento;
 
     public Carne(String nombre, String fecha, int valor) {
-        super("creacionUsuriosYMateriles.Carne", valor);
+        super("Carne", valor);
         this.nombre = nombre;
         this.fechaVencimiento = fecha;
     }
@@ -15,7 +15,7 @@ public class Carne extends Material implements Comprable {
     @Override
     public void comprar() {
         disponible = false;
-        System.out.println("creacionUsuriosYMateriles.Carne comprada: " + nombre);
+        System.out.println("Carne comprada: " + nombre);
     }
 
     @Override
